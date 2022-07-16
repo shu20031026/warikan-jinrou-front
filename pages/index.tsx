@@ -6,7 +6,7 @@ import { DefaultLayout } from '~/layouts/Default'
 
 const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
-  
+
   return (
     <DefaultLayout>
       <div style={{ marginTop: '20%' }}>
