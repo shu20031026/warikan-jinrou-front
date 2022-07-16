@@ -8,7 +8,7 @@ const liffId = process.env.NEXT_PUBLIC_LIFF_ID!
 
 export const Authenticated = () => {
   const { setUser: setUserContext } = useContext(AuthContext)
-
+  
   const setUser = async (userUid: string): Promise<void> => {
     // 今回はデモ用のテンプレートコードなので、nameに仮のdisplayNameを設定している
     // 本来はここでuserUidをもとにDBから値を取り、setUserContextに反映させる
