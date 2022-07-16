@@ -35,10 +35,8 @@ export const Authenticated = () => {
 
       const profile = await liff.getProfile()
       setUser(profile.userId)
-      const groupData = await liff.getContext()
 
       console.info(profile)
-      console.info(groupData.groupId)
     } catch (err) {
       handleError(err)
     }
