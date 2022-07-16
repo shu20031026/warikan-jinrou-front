@@ -26,7 +26,7 @@ export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
         >
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 2, color: '#ff0000' }}>ログインに失敗しました</div>
-            <a href="https://github.com/hyodoblog">
+            <a href="https://github.com/shu20031026">
               <div style={{ textDecoration: 'underline' }}>管理人へ</div>
             </a>
           </div>
