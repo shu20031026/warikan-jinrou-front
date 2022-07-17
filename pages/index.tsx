@@ -5,7 +5,7 @@ import RangeSlider from 'react-bootstrap-range-slider'
 import { useRecoilValue } from 'recoil'
 
 import { AuthContext } from '~/contexts/AuthContext'
-import { groupIdState, queryState } from '~/contexts/store/gameData'
+import { queryState } from '~/contexts/store/gameData'
 export const container = css`
   display: flex;
   flex-direction: column;
@@ -74,16 +74,22 @@ const HomePage: NextPage = () => {
   const [isSending, setIsSending] = useState<boolean>(false)
   const { user } = useContext(AuthContext)
   const { sessionId, totalPrice } = useRecoilValue(queryState)
-  const { groupId } = useRecoilValue(groupIdState)
-  console.info(sessionId)
-  console.info(groupId)
+
+  const postData = {
+    sessionId: sessionId,
+    userId: user?.userUid,
+    userData: {
+      user_name: user?.name,
+      payment_offer_price: sliderValue
+    }
+  }
 
   const sendData = async () => {
     setIsSending(true)
-    await fetch('http://', {
+    await fetch('https://warikan-jinrou.netlify.app/api/payment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({})
+      body: JSON.stringify(postData)
     })
       .then((res) => res.json())
       .then((data) => {
@@ -100,7 +106,11 @@ const HomePage: NextPage = () => {
 
   return (
     <div css={container}>
-      {!isSending && <div css={lordingOverLay}></div>}
+      {isSending && (
+        <div css={lordingOverLay}>
+          <div>Lording...</div>
+        </div>
+      )}
       <div>
         {totalPrice !== null ? (
           <div css={contentWrapper}>
@@ -134,8 +144,8 @@ const HomePage: NextPage = () => {
                   css={buttonStyle}
                   onTouchStart={() => {
                     //データをPOST
+                    console.info(postData)
                     sendData()
-                    console.info(sliderValue)
                   }}
                 >
                   決定
@@ -143,7 +153,10 @@ const HomePage: NextPage = () => {
               </>
             ) : (
               <>
-                <div></div>
+                <div>
+                  <p>送信完了</p>
+                  <p>{sliderValue}</p>
+                </div>
               </>
             )}
           </div>
