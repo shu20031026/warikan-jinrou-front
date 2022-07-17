@@ -23,7 +23,16 @@ export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
 
   if (isError) {
     return (
-      <div style={{ margin: 'auto', maxWidth: '600', height: '100vh', minHeight: '100vh', paddingBottom: 2 }}>
+      <div
+        style={{
+          margin: 'auto',
+          maxWidth: '600',
+          height: '100vh',
+          minHeight: '100vh',
+          paddingBottom: 2,
+          overflow: 'hidden'
+        }}
+      >
         <div
           style={{
             position: 'fixed',
