@@ -2,6 +2,7 @@ import 'ress'
 import '~/styles/globals.scss'
 
 import type { AppProps } from 'next/app'
+import { RecoilRoot } from 'recoil'
 
 import { Authenticated } from '~/components/Authenticated'
 import { AuthProvider } from '~/contexts/AuthContext'
@@ -12,12 +13,14 @@ export default function MyApp({ Component, pageProps, router }: AppProps): JSX.E
   useScrollTop()
 
   return (
-    <AuthProvider>
-      <Authenticated />
+    <RecoilRoot>
+      <AuthProvider>
+        <Authenticated />
 
-      <DefaultLayout>
-        <Component {...pageProps} key={router.asPath} />
-      </DefaultLayout>
-    </AuthProvider>
+        <DefaultLayout>
+          <Component {...pageProps} key={router.asPath} />
+        </DefaultLayout>
+      </AuthProvider>
+    </RecoilRoot>
   )
 }
