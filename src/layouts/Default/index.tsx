@@ -9,6 +9,7 @@ import { AuthContext } from '~/contexts/AuthContext'
 import { sessionIdState } from '~/contexts/store/gameData'
 
 import type { LayoutProps } from '../types'
+import { container } from './style'
 
 export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   const { isError, isLogIn } = useContext(AuthContext)
@@ -24,6 +25,7 @@ export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   if (isError) {
     return (
       <div
+        css={container}
         style={{
           margin: 'auto',
           maxWidth: '600',
@@ -57,7 +59,10 @@ export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   }
 
   return (
-    <div style={{ margin: 'auto', maxWidth: '600', height: '100vh', minHeight: '100vh', paddingBottom: 2 }}>
+    <div
+      css={container}
+      style={{ margin: 'auto', maxWidth: '600', height: '100vh', minHeight: '100vh', paddingBottom: 2 }}
+    >
       {isLogIn ? children : <Loader />}
     </div>
   )
