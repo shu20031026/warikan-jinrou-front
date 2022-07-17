@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil'
 
 import { AuthContext } from '~/contexts/AuthContext'
 import { groupIdState, queryState } from '~/contexts/store/gameData'
-
 export const container = css`
   display: flex;
   flex-direction: column;
@@ -54,52 +53,99 @@ export const middleSpan = css`
   color: #fff5ee;
 `
 
+export const lordingOverLay = css`
+  position: fixed;
+  display: flex;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+`
+
+export const lordingSvg = css`
+  color: #3bacb6;
+`
+
 const HomePage: NextPage = () => {
   const [sliderValue, setSliderValue] = useState<number>(0)
-  // const [alreadySendData, setAlreadySendData] = useState<boolean | 'sending'>(false)
+  const [isAlreadySendData, setIsAlreadySendData] = useState<boolean>(false)
+  const [isSending, setIsSending] = useState<boolean>(false)
   const { user } = useContext(AuthContext)
   const { sessionId, totalPrice } = useRecoilValue(queryState)
   const { groupId } = useRecoilValue(groupIdState)
   console.info(sessionId)
   console.info(groupId)
+
+  const sendData = async () => {
+    setIsSending(true)
+    await fetch('http://', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.info(data)
+        setIsSending(false)
+        setIsAlreadySendData(true)
+      })
+      .catch((err) => {
+        console.error(err)
+        setIsSending(false)
+        setIsAlreadySendData(false)
+      })
+  }
+
   return (
     <div css={container}>
-      <p>
-        <span css={middleSpan}>{user?.name} </span>さんは
-        <br />
-        合計金額 <span css={middleSpan}>{totalPrice}</span> 円のうち
-        <br />
-        いくらまで支払えますか...？
-      </p>
+      {!isSending && <div css={lordingOverLay}></div>}
       <div>
         {totalPrice !== null ? (
           <div css={contentWrapper}>
-            <p css={nowAmount}>{sliderValue}円</p>
-            <div css={slideBarWrapper}>
-              <div css={slideBarScale}>
-                <span>¥０</span>
-                <span>¥{totalPrice}</span>
-              </div>
-              <RangeSlider
-                value={sliderValue}
-                min={0}
-                max={totalPrice}
-                tooltip={'off'}
-                step={totalPrice / 100}
-                onChange={(e) => {
-                  setSliderValue(parseInt(e.target.value))
-                }}
-              />
-            </div>
-            <button
-              css={buttonStyle}
-              onTouchStart={() => {
-                //データをPOST
-                console.info(sliderValue)
-              }}
-            >
-              決定
-            </button>
+            {!isAlreadySendData ? (
+              <>
+                <p>
+                  <span css={middleSpan}>{user?.name} </span>さんは
+                  <br />
+                  合計金額 <span css={middleSpan}>{totalPrice}</span> 円のうち
+                  <br />
+                  いくらまで支払えますか...？
+                </p>
+                <p css={nowAmount}>{sliderValue}円</p>
+                <div css={slideBarWrapper}>
+                  <div css={slideBarScale}>
+                    <span>¥０</span>
+                    <span>¥{totalPrice}</span>
+                  </div>
+                  <RangeSlider
+                    value={sliderValue}
+                    min={0}
+                    max={totalPrice}
+                    tooltip={'off'}
+                    step={totalPrice / 100}
+                    onChange={(e) => {
+                      setSliderValue(parseInt(e.target.value))
+                    }}
+                  />
+                </div>
+                <button
+                  css={buttonStyle}
+                  onTouchStart={() => {
+                    //データをPOST
+                    sendData()
+                    console.info(sliderValue)
+                  }}
+                >
+                  決定
+                </button>
+              </>
+            ) : (
+              <>
+                <div></div>
+              </>
+            )}
           </div>
         ) : (
           <div>error</div>
