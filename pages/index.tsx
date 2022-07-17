@@ -1,20 +1,24 @@
+import { css } from '@emotion/react'
 import type { NextPage } from 'next'
 import { useContext } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { AuthContext } from '~/contexts/AuthContext'
-import { groupIdState, sessionIdState } from '~/contexts/store/gameData'
+import { groupIdState, queryState } from '~/contexts/store/gameData'
 
+export const container = css`
+  background-color: #3bacb6;
+`
 const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
-  const sessionId = useRecoilValue(sessionIdState)
-  const groupId = useRecoilValue(groupIdState)
+  const { sessionId, totalPrice } = useRecoilValue(queryState)
+  const { groupId } = useRecoilValue(groupIdState)
 
   return (
-    <div style={{ margin: '0' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: 8, textAlign: 'center' }}>ようこそ、LIFFの世界へ</h1>
+    <div>
+      <h1>ようこそ、LIFFの世界へ</h1>
 
-      <table style={{ margin: 'auto' }}>
+      <table>
         <tbody>
           <tr>
             <td>LINE表示名</td>
@@ -26,11 +30,15 @@ const HomePage: NextPage = () => {
           </tr>
           <tr>
             <td>sessionId</td>
-            <td>：{sessionId.sessionId}</td>
+            <td>：{sessionId}</td>
           </tr>
           <tr>
             <td>groupId</td>
-            <td>：{groupId.groupId}</td>
+            <td>：{groupId}</td>
+          </tr>
+          <tr>
+            <td>totalPrice</td>
+            <td>：{totalPrice}</td>
           </tr>
         </tbody>
       </table>
