@@ -15,6 +15,8 @@ export const container = css`
   height: 100vh;
   width: 100vw;
   padding: 4vh 8vw;
+  color: white;
+  font-size: 1.4rem;
 `
 
 export const slideBarWrapper = css`
@@ -43,8 +45,18 @@ export const buttonStyle = css`
   color: #3bacb6;
 `
 
+export const nowAmount = css`
+  font-size: 2rem;
+`
+
+export const middleSpan = css`
+  font-size: 1.8rem;
+  color: #fff5ee;
+`
+
 const HomePage: NextPage = () => {
   const [sliderValue, setSliderValue] = useState<number>(0)
+  // const [alreadySendData, setAlreadySendData] = useState<boolean | 'sending'>(false)
   const { user } = useContext(AuthContext)
   const { sessionId, totalPrice } = useRecoilValue(queryState)
   const { groupId } = useRecoilValue(groupIdState)
@@ -53,14 +65,16 @@ const HomePage: NextPage = () => {
   return (
     <div css={container}>
       <p>
-        {user?.name}さんは合計金額{totalPrice}円のうち、
+        <span css={middleSpan}>{user?.name} </span>さんは
+        <br />
+        合計金額 <span css={middleSpan}>{totalPrice}</span> 円のうち
         <br />
         いくらまで支払えますか...？
       </p>
       <div>
         {totalPrice !== null ? (
           <div css={contentWrapper}>
-            <p>{sliderValue}円</p>
+            <p css={nowAmount}>{sliderValue}円</p>
             <div css={slideBarWrapper}>
               <div css={slideBarScale}>
                 <span>¥０</span>
@@ -79,7 +93,7 @@ const HomePage: NextPage = () => {
             </div>
             <button
               css={buttonStyle}
-              onClick={() => {
+              onTouchStart={() => {
                 //データをPOST
                 console.info(sliderValue)
               }}
