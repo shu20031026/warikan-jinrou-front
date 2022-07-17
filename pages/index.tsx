@@ -47,6 +47,8 @@ const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
   const { sessionId, totalPrice } = useRecoilValue(queryState)
   const { groupId } = useRecoilValue(groupIdState)
+  console.info(sessionId)
+  console.info(groupId)
   return (
     <div css={container}>
       <p>
