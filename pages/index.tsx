@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import type { NextPage } from 'next'
 import { useContext } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -5,6 +6,9 @@ import { useRecoilValue } from 'recoil'
 import { AuthContext } from '~/contexts/AuthContext'
 import { groupIdState, queryState } from '~/contexts/store/gameData'
 
+export const container = css`
+  background-color: #3bacb6;
+`
 const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
   const { sessionId, totalPrice } = useRecoilValue(queryState)
