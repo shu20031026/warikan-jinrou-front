@@ -1,13 +1,25 @@
+import { useRouter } from 'next/router'
 import type { FC } from 'react'
+import { useEffect } from 'react'
 import { useContext } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import { Loader } from '~/components/Loader'
 import { AuthContext } from '~/contexts/AuthContext'
+import { sessionIdState } from '~/contexts/store/gameData'
 
 import type { LayoutProps } from '../types'
 
 export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   const { isError, isLogIn } = useContext(AuthContext)
+  const setSession = useSetRecoilState(sessionIdState)
+  const router = useRouter()
+  const query = router.query
+
+  useEffect(() => {
+    const sessionId = typeof query.sessionId === 'string' ? query.sessionId : null
+    setSession({ sessionId })
+  }, [query])
 
   if (isError) {
     return (
