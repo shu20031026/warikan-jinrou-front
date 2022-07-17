@@ -1,5 +1,7 @@
 import 'ress'
 import '~/styles/globals.scss'
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
