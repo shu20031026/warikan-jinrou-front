@@ -7,8 +7,8 @@ import { groupIdState, sessionIdState } from '~/contexts/store/gameData'
 
 const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
-  const sessionId = useRecoilValue(sessionIdState)
-  const groupId = useRecoilValue(groupIdState)
+  const { sessionId } = useRecoilValue(sessionIdState)
+  const { groupId } = useRecoilValue(groupIdState)
 
   return (
     <div style={{ marginTop: '20%' }}>
@@ -26,11 +26,11 @@ const HomePage: NextPage = () => {
           </tr>
           <tr>
             <td>sessionId</td>
-            <td>：{sessionId.sessionId}</td>
+            <td>：{sessionId}</td>
           </tr>
           <tr>
             <td>groupId</td>
-            <td>：{groupId.groupId}</td>
+            <td>：{groupId}</td>
           </tr>
         </tbody>
       </table>
