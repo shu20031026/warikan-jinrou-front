@@ -19,8 +19,8 @@ export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const sessionId = typeof query.sessionId === 'string' ? query.sessionId : null
-    const totalPriceData = Number(query.totalPrice)
-    const totalPrice = typeof totalPriceData === 'number' ? totalPriceData : null
+    const totalPriceData = parseInt(typeof query.totalPrice === 'string' ? query.totalPrice : '-1')
+    const totalPrice = totalPriceData > 0 ? totalPriceData : null
     setQuery({ sessionId, totalPrice })
   }, [query])
 

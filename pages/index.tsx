@@ -18,6 +18,15 @@ const HomePage: NextPage = () => {
     <div>
       <h1>ようこそ、LIFFの世界へ</h1>
 
+      <div>
+        {totalPrice !== null ? (
+          <>
+            <p>{totalPrice}</p>
+          </>
+        ) : (
+          <div>error</div>
+        )}
+      </div>
       <table>
         <tbody>
           <tr>
