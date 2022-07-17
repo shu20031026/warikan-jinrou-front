@@ -12,7 +12,7 @@ const HomePage: NextPage = () => {
 
   return (
     <div style={{ marginTop: '20%' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: 8, textAlign: 'center', color: 'red' }}>ようこそ、LIFFの世界へ</h1>
+      <h1 style={{ fontSize: '2rem', marginBottom: 8, textAlign: 'center' }}>ようこそ、LIFFの世界へ</h1>
 
       <table style={{ margin: 'auto' }}>
         <tbody>
