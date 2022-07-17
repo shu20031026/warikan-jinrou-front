@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { AuthContext } from '~/contexts/AuthContext'
-import { groupIdState, sessionIdState } from '~/contexts/store/gameData'
+import { groupIdState, queryState } from '~/contexts/store/gameData'
 
 const HomePage: NextPage = () => {
   const { user } = useContext(AuthContext)
-  const { sessionId } = useRecoilValue(sessionIdState)
+  const { sessionId, totalPrice } = useRecoilValue(queryState)
   const { groupId } = useRecoilValue(groupIdState)
 
   return (
@@ -31,6 +31,10 @@ const HomePage: NextPage = () => {
           <tr>
             <td>groupId</td>
             <td>：{groupId}</td>
+          </tr>
+          <tr>
+            <td>totalPrice</td>
+            <td>：{totalPrice}</td>
           </tr>
         </tbody>
       </table>

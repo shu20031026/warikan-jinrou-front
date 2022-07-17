@@ -4,8 +4,9 @@ export interface GroupId {
   groupId: string | null
 }
 
-export interface SessionId {
+export interface QueryId {
   sessionId: string | null
+  totalPrice: number | null
 }
 
 export const groupIdState = atom<GroupId>({
@@ -15,9 +16,10 @@ export const groupIdState = atom<GroupId>({
   }
 })
 
-export const sessionIdState = atom<SessionId>({
-  key: 'sessionId',
+export const queryState = atom<QueryId>({
+  key: 'QueryId',
   default: {
-    sessionId: null
+    sessionId: null,
+    totalPrice: null
   }
 })

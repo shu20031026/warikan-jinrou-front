@@ -6,20 +6,22 @@ import { useSetRecoilState } from 'recoil'
 
 import { Loader } from '~/components/Loader'
 import { AuthContext } from '~/contexts/AuthContext'
-import { sessionIdState } from '~/contexts/store/gameData'
+import { queryState } from '~/contexts/store/gameData'
 
 import type { LayoutProps } from '../types'
 import { container } from './style'
 
 export const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   const { isError, isLogIn } = useContext(AuthContext)
-  const setSession = useSetRecoilState(sessionIdState)
+  const setQuery = useSetRecoilState(queryState)
   const router = useRouter()
   const query = router.query
 
   useEffect(() => {
     const sessionId = typeof query.sessionId === 'string' ? query.sessionId : null
-    setSession({ sessionId })
+    const totalPriceData = Number(query.totalPrice)
+    const totalPrice = typeof totalPriceData === 'number' ? totalPriceData : null
+    setQuery({ sessionId, totalPrice })
   }, [query])
 
   if (isError) {
