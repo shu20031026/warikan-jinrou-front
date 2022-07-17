@@ -11,7 +11,7 @@ const HomePage: NextPage = () => {
   const groupId = useRecoilValue(groupIdState)
 
   return (
-    <div style={{ marginTop: '20%' }}>
+    <div style={{ margin: '0' }}>
       <h1 style={{ fontSize: '2rem', marginBottom: 8, textAlign: 'center' }}>ようこそ、LIFFの世界へ</h1>
 
       <table style={{ margin: 'auto' }}>
