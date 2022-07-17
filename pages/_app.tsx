@@ -9,6 +9,14 @@ import { AuthProvider } from '~/contexts/AuthContext'
 import { useScrollTop } from '~/hooks/useScrollTop'
 import { DefaultLayout } from '~/layouts/Default'
 
+document.addEventListener(
+  'touchmove',
+  (e) => {
+    e.preventDefault()
+  },
+  { passive: false }
+)
+
 export default function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
   useScrollTop()
 
