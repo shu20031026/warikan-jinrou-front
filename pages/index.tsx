@@ -38,7 +38,8 @@ export const buttonStyle = css`
   border-radius: 10px;
   background-color: white;
   margin-top: 10px;
-  padding: 4px 20px;
+  height: 40px;
+  width: 60%;
   color: #3bacb6;
 `
 
