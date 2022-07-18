@@ -86,7 +86,7 @@ const HomePage: NextPage = () => {
 
   const sendData = async () => {
     setIsSending(true)
-    await fetch('https://warikan-jinrou.netlify.app/api/payment', {
+    await fetch('/api/proxy/payment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData)
