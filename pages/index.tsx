@@ -155,7 +155,7 @@ const HomePage: NextPage = () => {
               <>
                 <div>
                   <p>送信完了</p>
-                  <p>{sliderValue}</p>
+                  <p>{sliderValue}円で申請しました！</p>
                 </div>
               </>
             )}
